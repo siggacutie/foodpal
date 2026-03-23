@@ -15,28 +15,42 @@ class AppTheme {
       textTheme: GoogleFonts.plusJakartaSansTextTheme().copyWith(
         displayLarge: GoogleFonts.plusJakartaSans(
           color: textBlack,
-          fontWeight: FontWeight.bold,
+          fontWeight: FontWeight.w800,
+          fontSize: 32,
+          letterSpacing: -1,
+        ),
+        displayMedium: GoogleFonts.plusJakartaSans(
+          color: textBlack,
+          fontWeight: FontWeight.w800,
           fontSize: 24,
+          letterSpacing: -0.5,
         ),
         bodyLarge: GoogleFonts.plusJakartaSans(
           color: textBlack,
           fontSize: 16,
+          fontWeight: FontWeight.w500,
         ),
         bodyMedium: GoogleFonts.plusJakartaSans(
           color: slateGrey,
           fontSize: 14,
+          fontWeight: FontWeight.w400,
         ),
         labelSmall: GoogleFonts.plusJakartaSans(
           color: slateGrey,
-          fontSize: 12,
-          fontWeight: FontWeight.bold,
-          letterSpacing: 1.2,
+          fontSize: 11,
+          fontWeight: FontWeight.w800,
+          letterSpacing: 1.5,
         ),
       ),
       colorScheme: ColorScheme.fromSeed(
         seedColor: primaryAccent,
         primary: primaryAccent,
         surface: Colors.white,
+      ),
+      cardTheme: CardThemeData(
+        elevation: 0,
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(24)),
+        color: Colors.white,
       ),
     );
   }

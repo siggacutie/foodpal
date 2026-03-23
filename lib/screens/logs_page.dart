@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter/services.dart';
 import 'dart:async';
 import '../providers/log_provider.dart';
 import '../theme/app_theme.dart';
 import '../widgets/header_widgets.dart';
 import '../widgets/log_widgets.dart';
+import '../widgets/date_selector.dart';
 
 class LogsPage extends ConsumerStatefulWidget {
   const LogsPage({super.key});
@@ -17,6 +19,7 @@ class _LogsPageState extends ConsumerState<LogsPage> with SingleTickerProviderSt
   String? _aiStatus;
   late AnimationController _controller;
   Timer? _statusTimer;
+  bool _isAddPressed = false;
 
   @override
   void initState() {
@@ -35,6 +38,7 @@ class _LogsPageState extends ConsumerState<LogsPage> with SingleTickerProviderSt
   }
 
   void _onAddTapped() {
+    HapticFeedback.mediumImpact();
     setState(() {
       _aiStatus = 'Thinking...';
     });
@@ -77,7 +81,7 @@ class _LogsPageState extends ConsumerState<LogsPage> with SingleTickerProviderSt
                   const SizedBox(width: 12),
                   HeaderAction(icon: Icons.dark_mode_outlined, onTap: () {}),
                   const Spacer(),
-                  const PillButton(label: 'March 20'),
+                  const DateSelector(),
                   const Spacer(),
                   const PillButton(
                     label: '735 kcal',
@@ -151,15 +155,31 @@ class _LogsPageState extends ConsumerState<LogsPage> with SingleTickerProviderSt
                                   color: AppTheme.slateGrey,
                                 ),
                                 const SizedBox(width: 4),
-                                Container(
-                                  decoration: BoxDecoration(
-                                    color: Colors.grey.shade100,
-                                    borderRadius: BorderRadius.circular(10),
-                                  ),
-                                  child: IconButton(
-                                    icon: const Icon(Icons.add, size: 24),
-                                    onPressed: _onAddTapped,
-                                    color: AppTheme.textBlack,
+                                GestureDetector(
+                                  onTapDown: (_) => setState(() => _isAddPressed = true),
+                                  onTapUp: (_) => setState(() => _isAddPressed = false),
+                                  onTapCancel: () => setState(() => _isAddPressed = false),
+                                  onTap: _onAddTapped,
+                                  child: AnimatedScale(
+                                    scale: _isAddPressed ? 0.9 : 1.0,
+                                    duration: const Duration(milliseconds: 100),
+                                    child: Container(
+                                      decoration: BoxDecoration(
+                                        color: AppTheme.primaryAccent,
+                                        borderRadius: BorderRadius.circular(12),
+                                        boxShadow: [
+                                          BoxShadow(
+                                            color: AppTheme.primaryAccent.withOpacity(0.3),
+                                            blurRadius: 10,
+                                            offset: const Offset(0, 4),
+                                          ),
+                                        ],
+                                      ),
+                                      child: const Padding(
+                                        padding: EdgeInsets.all(8.0),
+                                        child: Icon(Icons.add, size: 24, color: Colors.white),
+                                      ),
+                                    ),
                                   ),
                                 ),
                               ],
