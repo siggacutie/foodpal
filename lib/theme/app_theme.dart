@@ -8,6 +8,11 @@ class AppTheme {
   static const Color textBlack = Color(0xFF2D2D2D);
   static const Color softShadow = Color(0x1A000000);
 
+  // Animation Constants
+  static const Duration animationDuration = Duration(milliseconds: 350);
+  static const Curve animationCurve = Curves.easeInOutQuart; // Apple-like smooth curve
+  static const Duration slowAnimationDuration = Duration(milliseconds: 450);
+
   static ThemeData get lightTheme {
     return ThemeData(
       useMaterial3: true,

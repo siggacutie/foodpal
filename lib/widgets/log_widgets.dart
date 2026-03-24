@@ -30,10 +30,23 @@ class _LogItemState extends State<LogItem> {
       onTap: _onTap,
       behavior: HitTestBehavior.opaque,
       child: AnimatedScale(
-        scale: _isPressed ? 0.98 : 1.0,
-        duration: const Duration(milliseconds: 100),
-        child: Padding(
-          padding: const EdgeInsets.symmetric(vertical: 12),
+        scale: _isPressed ? 0.97 : 1.0,
+        duration: const Duration(milliseconds: 150),
+        curve: AppTheme.animationCurve,
+        child: AnimatedContainer(
+          duration: const Duration(milliseconds: 150),
+          padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 12), 
+          decoration: BoxDecoration(
+            color: _isPressed ? Colors.white : Colors.transparent,
+            borderRadius: BorderRadius.circular(16),
+            boxShadow: _isPressed ? [
+              BoxShadow(
+                color: Colors.black.withOpacity(0.05),
+                blurRadius: 10,
+                offset: const Offset(0, 4),
+              )
+            ] : [],
+          ),
           child: Row(
             children: [
               Container(
@@ -43,7 +56,7 @@ class _LogItemState extends State<LogItem> {
                   shape: BoxShape.circle,
                   color: widget.entry.status == LogStatus.active
                       ? AppTheme.primaryAccent
-                      : AppTheme.slateGrey.withValues(alpha: 0.5),
+                      : AppTheme.slateGrey.withOpacity(0.5),
                 ),
               ),
               const SizedBox(width: 16),
@@ -62,13 +75,13 @@ class _LogItemState extends State<LogItem> {
                   widget.entry.time,
                   style: TextStyle(
                     fontSize: 14,
-                    color: AppTheme.slateGrey.withValues(alpha: 0.6),
+                    color: AppTheme.slateGrey.withOpacity(0.6),
                     fontWeight: FontWeight.w500,
                   ),
                 ),
               const SizedBox(width: 12),
               Text(
-                '${widget.entry.calories} kcal',
+                '\\\ kcal',
                 style: const TextStyle(
                   fontSize: 14,
                   color: AppTheme.slateGrey,
@@ -109,10 +122,23 @@ class _SearchLogItemState extends State<SearchLogItem> {
       onTap: _onTap,
       behavior: HitTestBehavior.opaque,
       child: AnimatedScale(
-        scale: _isPressed ? 0.98 : 1.0,
-        duration: const Duration(milliseconds: 100),
-        child: Padding(
-          padding: const EdgeInsets.symmetric(vertical: 10),
+        scale: _isPressed ? 0.97 : 1.0,
+        duration: const Duration(milliseconds: 150),
+        curve: AppTheme.animationCurve,
+        child: AnimatedContainer(
+          duration: const Duration(milliseconds: 150),
+          padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 12), 
+          decoration: BoxDecoration(
+            color: _isPressed ? Colors.white : Colors.transparent,
+            borderRadius: BorderRadius.circular(16),
+            boxShadow: _isPressed ? [
+              BoxShadow(
+                color: Colors.black.withOpacity(0.05),
+                blurRadius: 10,
+                offset: const Offset(0, 4),
+              )
+            ] : [],
+          ),
           child: Row(
             children: [
               Expanded(
@@ -131,12 +157,12 @@ class _SearchLogItemState extends State<SearchLogItem> {
                   style: TextStyle(
                     fontSize: 10,
                     fontWeight: FontWeight.w800,
-                    color: AppTheme.slateGrey.withValues(alpha: 0.4),
+                    color: AppTheme.slateGrey.withOpacity(0.4),
                   ),
                 ),
               const SizedBox(width: 12),
               Text(
-                '${widget.entry.calories} kcal',
+                '\\\ kcal',
                 style: const TextStyle(
                   fontSize: 14,
                   color: AppTheme.slateGrey,
